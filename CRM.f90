@@ -1,6 +1,10 @@
-! CRM:
-! Author: Salvador Rodríguez Gómez 
 module mod_client
+!  Licensing:
+!    This code is distributed under the GNU LGPL license.
+!  Modified:
+!    Nov 2016
+!  Author:
+!    Salvador Rodríguez-Gómez
  implicit none
  private
  integer,parameter             :: maxlinelength = 80
@@ -30,31 +34,19 @@ module mod_client
 end module mod_client
 !
 module mod_CSV_io
+!  Licensing:
+!    This code is distributed under the GNU LGPL license.
+!  Modified:
+!    29 November 2008
+!  Author:
+!    John Burkardt
  implicit none
  private
  public csv_file_line_count, csv_file_open_read, csv_value_count, csv_file_close_read,timestamp
  contains
  subroutine csv_value_count ( csv_record, csv_record_status, value_count )
-!*****************************************************************************80
-!
 !! CSV_COUNT counts the number of values in a CSV record.
-!
-!  Licensing:
-!
-!    This code is distributed under the GNU LGPL license.
-!
-!  Modified:
-!
-!    28 November 2008
-!
-!  Author:
-!
-!    John Burkardt
-!
-!  Parameters:
-!
   implicit none
-
   character csv_char
   character csv_char_old
   integer ( kind = 4 ) csv_len
@@ -64,25 +56,14 @@ module mod_CSV_io
   character :: TAB = achar ( 9 )
   integer ( kind = 4 ) value_count
   integer ( kind = 4 ) word_length
-!
-!  No values so far.
-!
   value_count = 0
-!
 !  We begin in "unquoted" status.
-!
   csv_record_status = 0
-!
 !  How many characters in the record?
-!
   csv_len = len_trim ( csv_record )
-!
 !  Count number of characters in each word.
-!
   word_length = 0
-!
 !  Consider each character.
-!
   csv_char_old = ','
 
   do csv_loc = 1, csv_len
@@ -1080,7 +1061,7 @@ program CRM
  use mod_input_output
  use mod_client
  use mod_csv_io, only : timestamp
- eterno_viajero: do while ( 1 > 0 )
+ !eterno_viajero: do while ( 1 > 0 )
   call read_input()
   if (seed_flag) then
    call init_random_seed(seed)
@@ -1090,6 +1071,6 @@ program CRM
   call ReadCSV()
   !write(6,'(a)')'Estoy esperando clientes'
   !call write_output()
- end do eterno_viajero
+ !end do eterno_viajero
  call timestamp()
 end program CRM
